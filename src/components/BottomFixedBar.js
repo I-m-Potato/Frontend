@@ -1,9 +1,9 @@
 import { Container, FlexBox } from "../styles/styled";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import calender from '../images/calender.png';
-import myPage from '../images/potato.png';
-import main from '../images/sprout.png';
+import calender from '../images/Calender.png';
+import myPage from '../images/Potato.png';
+import main from '../images/Sprout.png';
 
 function BottomFixedBar(){
     const navigate = useNavigate();
@@ -29,6 +29,7 @@ const ContainerBottomFixedBar = styled(Container)`
 position:fixed;
 bottom:0;
 
+z-index: 20;
 display:grid;
 grid-template-columns:repeat(3,1fr);
 

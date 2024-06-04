@@ -12,6 +12,13 @@ const GlobalStyles = createGlobalStyle`
          url('https://cdn.jsdelivr.net/gh/webfontworld/BMJua/BMJua.woff') format('woff'),
          url('https://cdn.jsdelivr.net/gh/webfontworld/BMJua/BMJua.ttf') format("truetype");
     font-display: swap;
+}
+@font-face {
+    font-family: 'Short Stack';
+    font-weight: normal;
+    font-style: normal;
+    src: url('path-to-your-fonts/ShortStack-Regular.ttf') format('truetype');
+    font-display: swap;
 } 
     *{
         box-sizing: border-box;
