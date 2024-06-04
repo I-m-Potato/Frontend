@@ -2,7 +2,7 @@ import React from 'react';
 import FullCalendar from '@fullcalendar/react'; // FullCalendar 컴포넌트 가져오기
 import dayGridPlugin from '@fullcalendar/daygrid'; // 필요한 플러그인 가져오기
 import styled from 'styled-components';
-
+import character from '../images/character.png'
 
 const Container = styled.div`
   width: 370px;
@@ -85,7 +85,7 @@ const DefaultPotatoImage = styled.img`
 const CalendarComponent = () => {
   return (
     <Container>
-        <DefaultPotatoImage src="images/character.png" alt="감자 캐릭터" />
+        <DefaultPotatoImage src={character} alt="감자 캐릭터" />
       <FullCalendar // FullCalendar 컴포넌트 추가
         plugins={[dayGridPlugin]} // 사용할 플러그인 지정
         initialView="dayGridMonth" // 초기 뷰 설정

@@ -1,12 +1,15 @@
 import React from "react";
 import styled from "styled-components";
+import weather from '../images/날씨.png';
+import back from '../images/배경3.jpg';
+import character from '../images/character.png';
 
 // 스타일 정의
 const Container = styled.div`
   width: 100%;
   max-width: 500px;
   box-sizing: border-box;
-  background-image: url('images/배경3.jpg'); 
+  background-image: url(${back}); 
   background-repeat: no-repeat;
   background-size: cover;
   text-align: center;
@@ -36,13 +39,13 @@ const formattedDate = `${today.getMonth() + 1}월 ${today.getDate()}일`;
 const Main = () => {
   return (
     <Container>
-      <WeatherImage src="images/날씨.png" alt="날씨" /> 
+      <WeatherImage src={weather} alt="날씨" /> 
       <Title>
         {formattedDate}<br />
         감자의 이야기<br />
         날씨: 햇빛 쨍쨍
       </Title>
-      <DefaultPotatoImage src="images/character.png" alt="감자 캐릭터" />
+      <DefaultPotatoImage src={character} alt="감자 캐릭터" />
     </Container>
   );
 };
