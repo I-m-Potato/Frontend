@@ -2,7 +2,10 @@ import styled from "styled-components";
 import { useState,useEffect} from "react";
 import MypageBackground from '../images/Mypage.png';
 import ThreePotato from '../images/Threepotato.png';
+import { useNavigate } from "react-router-dom";
+
 function MyPage(){
+    const navigate = useNavigate();
     const [info, setInfo]=useState({
         nickname: '행복한 감자',
         date: new Date(2024,5,15),
@@ -18,14 +21,14 @@ function MyPage(){
             <MypageContainer>
                 <MypageInfo><p>감자 심은 날:{info.date.getFullYear()}년 {info.date.getMonth()}월 {info.date.getDate()}일</p></MypageInfo>
                 <MypageInfo><p>{info.nickname}</p></MypageInfo>
-                <MypageBtn><p>감자 정보 수정</p></MypageBtn>
+                <MypageBtn onClick={()=>{navigate('/reviseInfo')}}><p>감자 정보 수정</p></MypageBtn>
             </MypageContainer>
        </MypageMain>
     )
 }
 export default MyPage
 
-const MypageMain= styled.div`
+export const MypageMain= styled.div`
     position: relative;
     margin-top: 20px;
     display: flex;
@@ -63,14 +66,14 @@ const MypageMain= styled.div`
     }
 `
 
-const MypageContainer=styled.div`
+export const MypageContainer=styled.div`
     display: inline-flex;
     flex-direction: column;
     align-items: flex-end;
     gap: 20px;
     margin-top: 36px;
 `
-const MypageInfo=styled.div`
+export const MypageInfo=styled.div`
     width: 335px;
     height: 39px;
     flex-shrink: 0;
@@ -80,6 +83,14 @@ const MypageInfo=styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    color: #513535;
+      align-items: center;
+      text-align: center;
+      font-family: ${props => props.fontFamily || '"BMJua"'};
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
     p{  
         color:#513535;
         align-items: center;
@@ -90,8 +101,22 @@ const MypageInfo=styled.div`
         font-weight: 400;
         line-height: normal;
     }
+    &::placeholder {
+      color: #513535;
+      align-items: center;
+      text-align: center;
+      font-family: "BMJua";
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
+    &:focus {
+    outline: none;
+    box-shadow: none;
+  }
 `
-const MypageBtn=styled.button`
+export const MypageBtn=styled.button`
     width: 335px;
     height: 39px;
     flex-shrink: 0;
