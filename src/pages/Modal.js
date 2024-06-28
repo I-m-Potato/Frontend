@@ -1,16 +1,43 @@
 import styled from "styled-components";
 import { useState,useEffect} from "react";
+import { useNavigate } from "react-router-dom";
 import ModalBackground from '../images/Diarybackground.png';
 import Mashed from '../images/Mashed.png'
+
 function Modal(){
+    const navigate = useNavigate();
     const [info, setInfo]=useState({
         date: new Date(2024,5,17),
+        location:'',
+        company:'',
+        activity:'',
+        emotion:''
     });
     const [isVisible, setIsVisible] = useState(true);
-
+    const handleChange= (e)=>{
+        const {name, value}=e.target
+        setInfo(prev=>({
+            ...prev,
+            [name]:value,
+        }));
+    };
     const toggleVisibility = () => {
+        if (!info.location || !info.company || !info.activity) {
+            alert('모든 필드를 입력해주세요.');
+            return;
+          } 
       setIsVisible(isVisible => !isVisible);
     };
+    const handleSubmit=(e)=>{
+        e.preventDefault();
+        if (!info.location || !info.company || !info.activity||!info.emotion) {
+            alert('모든 필드를 입력해주세요.');
+            return;
+          }
+        else{
+            navigate('/calender');
+        }
+    }
     useEffect(()=>{
     window.scroll(0,0);
     },[]);
@@ -20,49 +47,121 @@ function Modal(){
         <ModalMain>
             <ModalDate><h1>{info.date.getMonth()}월 {info.date.getDate()}일</h1></ModalDate>
             <ModalSelect isVisible={isVisible}>
-                <ModalChoose>
-                    <h1>오늘 어디 다녀왔어??</h1>
-                    <ul>
-                        <li>집</li>
-                        <li>학교</li>
-                        <li>공원</li>
-                        <li>카페</li>
-                    </ul>
-                    <ul>
-                        <li>도서관</li>
-                        <li>여행지</li>
-                        <li>산책로</li>
-                        <li>그 외</li>
-                    </ul>
+            <ModalChoose>
+                <h1>오늘 어디 다녀왔어??</h1>
+                <ul>
+                    <li>
+                    <input id="home" type="radio" name="location" value="집" checked={info.location === '집'} onChange={handleChange}/>
+                    <label htmlFor="home" >집</label>
+                    </li>
+                    <li>
+                    <input id="school" type="radio" name="location" value="학교" checked={info.location === '학교'} onChange={handleChange}/>
+                    <label htmlFor="school" >학교</label>
+                    </li>
+                    <li>
+                    <input id="park"type="radio" name="location" value="공원" checked={info.location === '공원'} onChange={handleChange}/>
+                    <label htmlFor="park" >공원</label>
+                    </li>
+                    <li>
+                    <input id="cafe"type="radio" name="location" value="카페" checked={info.location === '카페'} onChange={handleChange}/>
+                    <label htmlFor="cafe">카페</label>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                    <input id="library"type="radio" name="location" value="도서관" checked={info.location === '도서관'} onChange={handleChange}/>
+                    <label htmlFor="library">도서관</label>
+                    </li>
+                    <li>
+                    <input id="travel"type="radio" name="location" value="여행지" checked={info.location === '여행지'} onChange={handleChange}/>
+                    <label htmlFor="travel">여행지</label>
+                    </li>
+                    <li>
+                    <input id="trail"type="radio" name="location" value="산책지" checked={info.location === '산책지'} onChange={handleChange}/>
+                    <label htmlFor="trail">산책로</label>
+                    </li>
+                    <li>
+                    <input id="gym"type="radio" name="location" value="헬스장" checked={info.location === '헬스장'} onChange={handleChange}/>
+                    <label htmlFor="gym">헬스장</label>
+                    </li>
+                </ul>
                 </ModalChoose>
                 <ModalChoose>
                     <h1>누구랑 다녀왔어?</h1>
                     <ul>
-                        <li>혼자</li>
-                        <li>가족</li>
-                        <li>친구</li>
-                        <li>연인</li>
+                        <li>
+                            <input id="alone" type="radio" name="company" value="혼자" checked={info.company==='혼자'} onChange={handleChange} />
+                            <label htmlFor="alone">혼자</label>
+                        </li>
+                        <li>
+                            <input id="family" type="radio" name="company" value="가족" checked={info.company==='가족'} onChange={handleChange}/>
+                            <label htmlFor="family">가족</label>
+                        </li>
+                        <li>
+                            <input id="friend" type="radio" name="company" value="친구" checked={info.company==='친구'} onChange={handleChange}/>
+                            <label htmlFor="friend">친구</label>
+                        </li>
+                        <li>
+                            <input id="couple" type="radio" name="company" value="연인" checked={info.company==='연인'} onChange={handleChange}/>
+                            <label htmlFor="couple">연인</label>
+                        </li>
                     </ul>
                     <ul>
-                        <li>동료</li>
-                        <li>반려동물</li>
-                        <li>지인</li>
-                        <li>그 외</li>
+                        <li>
+                            <input id="companion" type="radio" name="company" value="동료" checked={info.company==='동료'} onChange={handleChange}/>
+                            <label htmlFor="companion">동료</label>
+                        </li>
+                        <li>
+                            <input id="pet" type="radio" name="company" value="반려동물" checked={info.company==='반려동물'} onChange={handleChange}/>
+                            <label htmlFor="pet">반려동물</label>
+                        </li>
+                        <li>
+                            <input id="acquaintance" type="radio" name="company" value="지인" checked={info.company==='지인'} onChange={handleChange}/>
+                            <label htmlFor="acquaintance">지인</label>
+                        </li>
+                        <li>
+                            <input id="parent" type="radio" name="company" value="부모님" checked={info.company==='부모님'} onChange={handleChange}/>
+                            <label htmlFor="parent">부모님</label>
+                        </li>
                     </ul>
                 </ModalChoose>
                 <ModalChoose>
                     <h1>뭐했어?</h1>
                     <ul>
-                        <li>산책</li>
-                        <li>맛집</li>
-                        <li>운동</li>
-                        <li>영화</li>
+                        <li>
+                            <input id="walk" type="radio" name="activity" value="산책" checked={info.activity==='산책'} onChange={handleChange}/>
+                            <label htmlFor="walk">산책</label>
+                        </li>
+                        <li>
+                            <input id="eat" type="radio" name="activity" value="맛집" checked={info.activity==='맛집'} onChange={handleChange}/>
+                            <label htmlFor="eat">맛집</label>
+                        </li>
+                        <li>
+                            <input id="exercise" type="radio" name="activity" value="운동" checked={info.activity==='운동'} onChange={handleChange}/>
+                            <label htmlFor="exercise">운동</label>
+                        </li>
+                        <li>
+                            <input id="movie" type="radio" name="activity" value="영화" checked={info.activity==='영화'} onChange={handleChange}/>
+                            <label htmlFor="movie">영화</label>
+                        </li>
                     </ul>
                     <ul>
-                        <li>독서</li>
-                        <li>요리</li>
-                        <li>쇼핑</li>
-                        <li>그 외</li>
+                        <li>
+                            <input id="read" type="radio" name="activity" value="독서" checked={info.activity==='독서'} onChange={handleChange}/>
+                            <label htmlFor="read">독서</label>
+                        </li>
+                        <li>
+                            <input id="cook" type="radio" name="activity" value="요리" checked={info.activity==='요리'} onChange={handleChange}/>
+                            <label htmlFor="cook">요리</label>
+                        </li>
+                        <li>
+                            <input id="buy" type="radio" name="activity" value="쇼핑" checked={info.activity==='쇼핑'} onChange={handleChange}/>
+                            <label htmlFor="buy">쇼핑</label>
+                        </li>
+                        <li>
+                            <input id="sleep" type="radio" name="activity" value="숙면" checked={info.activity==='숙면'} onChange={handleChange}/>
+                            <label htmlFor="sleep">숙면</label>
+                        </li>
                     </ul>
                 </ModalChoose>
                 <ModalNext>
@@ -74,15 +173,19 @@ function Modal(){
                     <TodayEcilpse><p>오늘의 감자</p></TodayEcilpse>
                 </ModalToday>
                 <ModalPotato>
-                    <img src={Mashed}/>
-                    <img src={Mashed}/>
+                    <input id="1" type="radio" name="emotion" value="슬픔" checked={info.emotion==='슬픔'} onChange={handleChange}/>
+                    <label htmlFor="1"><img src={Mashed}/></label>
+                    <input id="2" type="radio" name="emotion" value="기쁨" checked={info.emotion==='기쁨'} onChange={handleChange}/>
+                    <label htmlFor="2"><img src={Mashed}/></label>
                 </ModalPotato>
                 <ModalPotato>
-                    <img src={Mashed}/>
-                    <img src={Mashed}/>
+                    <input id="3" type="radio" name="emotion" value="불안" checked={info.emotion==='불안'} onChange={handleChange}/>
+                    <label htmlFor="3"><img src={Mashed}/></label>
+                    <input id="4" type="radio" name="emotion" value="신남" checked={info.emotion==='신남'} onChange={handleChange}/>
+                    <label htmlFor="4"><img src={Mashed}/></label>
                 </ModalPotato>
                 <ModalDone>
-                     <button onClick={toggleVisibility}>완료!</button>
+                     <button onClick={handleSubmit}>완료!</button>
                 </ModalDone>
             </ModalSelect2>
         </ModalMain>
@@ -175,8 +278,9 @@ const ModalSelect = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    display: ${props => (props.isVisible ? 'block' : 'none')}
+    display: ${props => (props.isVisible ? 'block' : 'none')};
 `
+
 const ModalChoose = styled.div`
     width: 80%;
     height: 85px;
@@ -213,7 +317,30 @@ const ModalChoose = styled.div`
         border-radius: 50%;
         border: solid 1px #716656;
     }
+    input[type="radio"] {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+        &:checked+label{
+            scale: 1.3;
+            color: #3A8726;
+        }
+  }
+  label {
+    cursor: pointer;
+    color:#716656;
+    text-align: center;
+    font-family: "BMJua";
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    &:hover {
+      scale:1.1;
+    }
+  }
 `
+
 const ModalNext=styled.div`
     width: 90%;
     height: 34px;
@@ -250,7 +377,7 @@ const ModalNext=styled.div`
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        display: ${props => (props.isVisible ? 'none' : 'block')}
+        display: ${props => (props.isVisible ? 'none' : 'block')};
     `
     const ModalToday=styled.div`
         width: 100%;
@@ -273,8 +400,8 @@ const ModalNext=styled.div`
     p{  
         color: #716656;
         text-align: center;
-        font-family: "Short Stack";
-        font-size: 14px;
+        font-family: "BMJua";
+        font-size: 13px;
         font-style: normal;
         font-weight: 400;
         line-height: normal;
@@ -289,6 +416,21 @@ const ModalNext=styled.div`
         img{
             width:90px;
             height:90px;
+        }
+        input[type="radio"] {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+        &:checked+label{
+            scale: 1.2;
+        }
+        }
+        label {
+            cursor: pointer;
+            &:hover {
+            scale:1.05;
+            }
         }
     `
     const ModalDone=styled.div`
