@@ -66,6 +66,7 @@ const CalendarComponent = () => {
     fetchDiaries(year, month);
   };
 
+
   // -- 버튼 클릭시 fetch함수 호출()
   // prev 버튼 클릭 핸들러
   const handlePrevClick = () => {
@@ -101,12 +102,11 @@ const CalendarComponent = () => {
     };
     const diaryExists=mockResponseData[info.dateStr]||false;
     console.log(info.dateStr,diaryExists);
-    if (diaryExists){
+    if (diaryExists){ 
       navigate(`/calender/${info.dateStr}`, { state: { date: info.dateStr, diary: true } });
     }else{
       navigate('/calender/modal', { state: { date: info.dateStr } });
     } 
-    //today눌렀을 때 없어지지 않도록
   };
 
   /*
@@ -120,7 +120,9 @@ const CalendarComponent = () => {
   const renderEventContent = (eventInfo) => {
     return (// 이벤트의 커스텀 콘텐츠를 렌더링. 이미지가 중앙에 배치되도록
       <EventContent>
-        <EventImage src= {eventInfo.event.extendedProps.imgSrc} alt='potatostamp' onClick={()=>handleDateClick(eventInfo)}/>
+        <EventImage src= {eventInfo.event.extendedProps.imgSrc}
+         alt='potatostamp'
+         onClick={()=>handleDateClick({dateStr:eventInfo.event.startStr})}/>
       </EventContent>
     );
   };
@@ -136,24 +138,24 @@ const CalendarComponent = () => {
         editable={true}
         dayMaxEvents={true}
         height={630}
-        customButtons={{
-          today: {
-            text: '오늘',
-            click: handleTodayClick
-          },
-          prev: {
-            text: '이전',
-            click: handlePrevClick
-          },
-          next: {
-            text: '다음',
-            click: handleNextClick
-          }
-        }}
         headerToolbar={{
           left: 'today',
           center: 'title',
           right: 'prev,next'
+        }}
+        customButtons={{
+          prev: {
+            text: 'prev',
+            click: handlePrevClick,
+          },
+          next: {
+            text: 'next',
+            click: handleNextClick,
+          },
+          today: {
+            text: 'today',
+            click: handleTodayClick,
+          },
         }}
         events={events}
         dateClick={handleDateClick}
