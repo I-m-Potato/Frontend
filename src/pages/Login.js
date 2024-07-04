@@ -19,6 +19,7 @@ const Login = () => {
         email: email,
         password: password,
       })
+      // 다시 해보기 
       .then((response) => {
         localStorage.setItem("Token", response.headers.authorization);
         console.log(response);
