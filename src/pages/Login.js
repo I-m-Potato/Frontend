@@ -18,7 +18,6 @@ const Login = () => {
       .post("/login", {
         email: email,
         password: password,
-      
       })
       // 다시 해보기 
       .then((response) => {
