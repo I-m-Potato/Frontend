@@ -22,7 +22,8 @@ function App() {
           <Route path="" element={<Main />} />
           <Route path="calender" element={<Calender />} />
           <Route path="calender/modal" element={<Modal/>}/>
-          <Route path="calender/diary" element={<Diary/>}/>      
+          <Route path="calender/diary" element={<Diary/>}/> 
+          <Route path="calender/diary/:date" element={<Diary/>}/>      
           <Route path="myPage" element={<MyPage />} />
           <Route path="reviseInfo" element={<ReviseInfo />} />
         </Route>

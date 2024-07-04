@@ -193,7 +193,7 @@ function Modal(){
     )
 }
 export default Modal
-const ModalContainer = styled.div`
+export const ModalContainer = styled.div`
     width: 393px;
     height: 556px;
     display: flex;
@@ -203,7 +203,7 @@ const ModalContainer = styled.div`
     flex-shrink: 0;
 `
 
-const CalenderH = styled.div`
+export const CalenderH = styled.div`
     display: flex;
     width: 393px;
     height: 72px;
@@ -222,7 +222,7 @@ const CalenderH = styled.div`
     }
 `
 
-const ModalMain = styled.div`
+export const ModalMain = styled.div`
     position: relative;
     display: flex;
     width: 366px;
@@ -254,7 +254,7 @@ const ModalMain = styled.div`
     }
 `
 
-const ModalDate = styled.div`
+export const ModalDate = styled.div`
     width: 100%;
     height: 44px;
     h1{
@@ -265,6 +265,10 @@ const ModalDate = styled.div`
         font-style: normal;
         font-weight: 400;
         line-height: normal;
+    }
+    img{
+        width: 33.951px;
+        height: 42px;
     }
 `
 const ModalSelect = styled.div`

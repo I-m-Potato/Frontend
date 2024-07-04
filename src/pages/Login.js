@@ -18,8 +18,6 @@ const Login = () => {
       .post("/login", {
         email: email,
         password: password,
-      
-      
       })
       .then((response) => {
         localStorage.setItem("Token", response.headers.authorization);
