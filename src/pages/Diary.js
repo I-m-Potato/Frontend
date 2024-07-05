@@ -1,13 +1,15 @@
 import styled from "styled-components";
 import { useState,useEffect} from "react";
-import { useParams } from "react-router-dom";
+import { useParams,useLocation,useNavigate } from "react-router-dom";
 import { ModalContainer,ModalMain,CalenderH,ModalDate } from "./Modal";
 import nextimg from "../images/next.svg"
 import previmg from "../images/prev.svg"
 import exalbum from "../images/album.png"
 function Diary(){
+    const location=useLocation();
+    const navigate=useNavigate();
     const [info, setInfo]=useState({
-        date: new Date(2024,5,17),
+        date: new Date(location.state.date),
         location:'도서관',
         company:'친구',
         activity:'독서',
@@ -16,18 +18,16 @@ function Diary(){
         recommendedtodo:'일기 쓰며 기록하기',
         album:'../images/album.png'
     });
-    const urlDate = useParams().date;
-    useEffect(()=>{
-        window.scroll(0,0);
-        },[]);
+    useEffect(() => {
+    window.scroll(0, 0);
+  }, );
     return(
        <ModalContainer>
-        
         <CalenderH><h1>CALENDER</h1></CalenderH>
         <ModalMain>
             <DiaryDate>
-                <img src={previmg}/>
-                <h1>{info.date.getMonth()}월 {info.date.getDate()}일</h1>
+                <img src={previmg} />
+                <h1>{info.date.getMonth()+1}월 {info.date.getDate()}일</h1>
                 <img src={nextimg}/>
             </DiaryDate>
             <DiaryContent>
