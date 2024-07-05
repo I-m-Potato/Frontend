@@ -4,13 +4,20 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import axios from 'axios';
+//import axios from 'axios';
 import character from '../images/character.png';
 
 const CalendarComponent = () => {
   const [events, setEvents] = useState([]); //이벤트 상태 정의 
-  const [state,setState]=useState();
+  //const [state,setState]=useState();
   const navigate = useNavigate(); //내비게이션 훅
+
+  let [year,setYear]=useState();
+  let [month,setMonth]=useState();
+  
+  useEffect(()=>{ /* 날짜가 바뀔때마다 fetchDiaries 호출하기*/
+    fetchDiaries(year,month);
+  },[year,month])
 
   //-- 다이어리 데이터를 서버에서 가져오고, bool형식의 일기유무인 response를 받아 감자표시하는 함수 
   //연도와 월을 기준으로 서버에서 다이어리 데이터를 가져옴
@@ -52,42 +59,9 @@ const CalendarComponent = () => {
       });
   };*/
 
-
-  // 시작날짜 설정
-  useEffect(() => {
-    const initialYear = today.getFullYear();
-    const initialMonth = today.getMonth() + 1;
-    fetchDiaries(initialYear, initialMonth);
-  }, []);
-
   const handleDatesSet = (arg) => {
-    const year = arg.start.getFullYear();
-    const month = arg.start.getMonth() + 1;
-    fetchDiaries(year, month);
-  };
-
-
-  // -- 버튼 클릭시 fetch함수 호출()
-  // prev 버튼 클릭 핸들러
-  const handlePrevClick = () => {
-    const currentYear = new Date().getFullYear();
-    const currentMonth = new Date().getMonth() + 1;
-    fetchDiaries(currentYear, currentMonth - 1);
-  };
-
-  // next 버튼 클릭 핸들러
-  const handleNextClick = () => {
-    const currentYear = new Date().getFullYear();
-    const currentMonth = new Date().getMonth() + 1;
-    fetchDiaries(currentYear, currentMonth + 1);
-  };
-
-  // today 버튼 클릭 핸들러
-  const handleTodayClick = () => {
-    const today = new Date();
-    const currentYear = today.getFullYear();
-    const currentMonth = today.getMonth() + 1;
-    fetchDiaries(currentYear, currentMonth);
+    setYear(arg.view.currentStart.getFullYear());
+    setMonth(arg.view.currentStart.getMonth()+1); //기준 월 달력의 첫번째 칸의 date:currentStart
   };
 
   // -- 날짜 클릭했을 때 일기기록에 따라 클릭했을 때 이동페이지 다르게 하는 함수 
@@ -103,7 +77,7 @@ const CalendarComponent = () => {
     const diaryExists=mockResponseData[info.dateStr]||false;
     console.log(info.dateStr,diaryExists);
     if (diaryExists){ 
-      navigate(`/calender/${info.dateStr}`, { state: { date: info.dateStr, diary: true } });
+      navigate(`/calender/diary/${info.dateStr}`, { state: { date: info.dateStr, diary: true } });
     }else{
       navigate('/calender/modal', { state: { date: info.dateStr } });
     } 
@@ -143,24 +117,10 @@ const CalendarComponent = () => {
           center: 'title',
           right: 'prev,next'
         }}
-        customButtons={{
-          prev: {
-            text: 'prev',
-            click: handlePrevClick,
-          },
-          next: {
-            text: 'next',
-            click: handleNextClick,
-          },
-          today: {
-            text: 'today',
-            click: handleTodayClick,
-          },
-        }}
         events={events}
         dateClick={handleDateClick}
-        eventClick={handleDateClick}
-        datesSet={handleDatesSet}
+        eventClick={handleDateClick} 
+        datesSet={handleDatesSet} //달이 바뀔 때마다 fetchDiaries 함수 호출하도록 
         eventContent={renderEventContent} // 이벤트 내용을 커스터마이즈
         eventDisplay='block'
       />

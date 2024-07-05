@@ -9,11 +9,18 @@ function Join(){
   const [usernameinput,setUsernameinput]=useState("");
   const [emailinput,setEmailinput]=useState("");
   const [passwordinput,setPasswordinput]=useState("");
-  const [message,setMessage]=useState("");
+  const [confirmPassword,setConfirmPassword]=useState("");
 
-  const registeraxios =() =>{
+  const registeraxios =(e) =>{
+    e.preventDefault();
+
+    if (passwordinput !== confirmPassword) {
+      window.alert('비밀번호가 일치하지 않습니다.');
+      return;
+    }
+
     axios
-    .post('pages/Join',{
+    .post('api명세서참고',{
       //request
       name:usernameinput,
       email:emailinput,
@@ -21,12 +28,14 @@ function Join(){
     })
     .then((response)=>{
       console.log(response);
-      alert('회원가입성공!');
-      if ((response.status=200)){
-        return navigate('/pages/Login');
-      }
-    }).catch((err)=>{
-      setMessage(err.response.data.message)
+      window.alert('회원가입성공!');
+      navigate('/login');
+     })
+     .then(data=>{
+      console.log(data);
+     })
+     .catch((err)=>{
+      window.alert('회원가입에 실패하였습니다. 다시 시도해 주세요');
       console.log(err);
     });
   };
@@ -35,20 +44,26 @@ function Join(){
     <Container>
     <DefaultPotatoImage src={ThreePotato} alt="감자 캐릭터" />
       <Title>Sign up</Title>
-      <Form>
+      <Form onSubmit={registeraxios}>
         <Input type="text" placeholder="이메일 주소" 
+        value={emailinput}
         onChange={(e)=>{
           setEmailinput(e.target.value);
         }}/>
         <Input type="text" placeholder="사용자 닉네임" 
+        value={usernameinput}
         onChange={(e)=>{
           setUsernameinput(e.target.value);
         }} />
         <Input type="password" placeholder="비밀번호"
+        value={passwordinput}
         onChange={(e) => {
           setPasswordinput(e.target.value);
         }} />
-        <Input type="text" placeholder="비밀번호 확인하기" />
+        <Input type="text" placeholder="비밀번호 확인하기"
+        value={confirmPassword}
+        onChange={(e) => setConfirmPassword(e.target.value)}
+        />
         <hr style={hrStyle} />
         <SubmitButton onClick={registeraxios} type="submit" value="회원가입" />
       </Form>
@@ -106,23 +121,6 @@ const SubmitButton = styled.input`
   font-size: 25px;
   border-radius: 30px;
   border: 0;
-`;
-
-const checkboxStyle = {
-    width: "25px",
-    height: "25px",
-    margin: "14px 5px 14px",
-    position:"relative",
-    top:"7px"
-  };
-
-const SignUpLink = styled.a`
-  display: block;
-  text-align: center;
-  margin-top: 20px;
-  font-size: 20px; 
-  text-decoration: none; 
-  color: #5A3A1C;
 `;
 
 const DefaultPotatoImage = styled.img`
