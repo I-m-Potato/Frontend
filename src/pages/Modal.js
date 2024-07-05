@@ -1,13 +1,14 @@
 import styled from "styled-components";
 import { useState,useEffect} from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useLocation } from "react-router-dom";
 import ModalBackground from '../images/Diarybackground.png';
 import Mashed from '../images/Mashed.png'
 
 function Modal(){
     const navigate = useNavigate();
+    const location =useLocation();
     const [info, setInfo]=useState({
-        date: new Date(2024,5,17),
+        date: new Date(location.state.date),
         location:'',
         company:'',
         activity:'',
@@ -45,7 +46,7 @@ function Modal(){
         <ModalContainer>
         <CalenderH><h1>CALENDER</h1></CalenderH>
         <ModalMain>
-            <ModalDate><h1>{info.date.getMonth()}월 {info.date.getDate()}일</h1></ModalDate>
+            <ModalDate><h1>{info.date.getMonth()+1}월 {info.date.getDate()}일</h1></ModalDate>
             <ModalSelect isVisible={isVisible}>
             <ModalChoose>
                 <h1>오늘 어디 다녀왔어??</h1>
