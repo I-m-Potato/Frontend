@@ -10,7 +10,9 @@ function Join(){
   const [emailinput,setEmailinput]=useState("");
   const [passwordinput,setPasswordinput]=useState("");
   const [confirmPassword,setConfirmPassword]=useState("");
-
+  const today=new Date();
+  const signup_date=`${today.getFullYear()}-${(today.getMonth()+1).toString().padStart(2,'0')}-${today.getDate().toString().padStart(2,'0')}`;
+  console.log(signup_date);
   const registeraxios =(e) =>{
     e.preventDefault();
 
@@ -25,6 +27,7 @@ function Join(){
       name:usernameinput,
       email:emailinput,
       pw:passwordinput,
+      signup_date: signup_date,
     })
     .then((response)=>{
       console.log(response);
@@ -97,7 +100,7 @@ const Form = styled.form`
   margin-top: 25px;
 `;
 
-const Input = styled.input`
+const Input=styled.input`
   font-family: 'BMJua', Arial, sans-serif;
   color: #FFFFFF;
   margin: 10px 25px auto;
@@ -108,7 +111,19 @@ const Input = styled.input`
   font-size: 25px;
   border-radius: 15px;
   border: 0;
+
+  //props를 활용하여 조건부로 스타일 설정 가능(비밀번호 입력 보이지 않음 방지)
+  ${props=>props.type==='password' &&  `
+    font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;
+    `}
+
+  &::placeholder {
+    font-family: 'BMJua', Arial, sans-serif; /* placeholder 폰트 설정 */
+  }
 `;
+
+
+
 
 const SubmitButton = styled.input`
   font-family: 'BMJua', Arial, sans-serif;
