@@ -15,7 +15,7 @@ const Login = () => {
     e.preventDefault();
 	// 창이 새로고침되는 것을 막는다. 
     axios
-      .post("/login", {
+      .post('http://172.16.4.191:3001/api/login', {
         email: email,
         password: password,
       })
@@ -24,7 +24,7 @@ const Login = () => {
         localStorage.setItem("Token", response.headers.authorization);
         console.log(response);
         if ((response.status = 200)) {
-          return navigate("/posts");
+          return navigate("/");
         }
       })
       .catch((err) => {

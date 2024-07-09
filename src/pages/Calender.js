@@ -4,7 +4,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-//import axios from 'axios';
+import axios from 'axios';
 import character from '../images/character.png';
 
 const CalendarComponent = () => {
@@ -14,7 +14,8 @@ const CalendarComponent = () => {
 
   let [year,setYear]=useState();
   let [month,setMonth]=useState();
-  
+  const userId = localStorage.getItem("UserId");
+
   useEffect(()=>{ /* 날짜가 바뀔때마다 fetchDiaries 호출하기*/
     fetchDiaries(year,month);
   },[year,month])
@@ -25,12 +26,20 @@ const CalendarComponent = () => {
     
     try {
       // 서버에서 데이터 가져오기 (여기서는 mock 데이터 사용)
-      const mockResponseData = {
-        '2024-07-01':true, 
-        '2024-07-25': true,
-        '2024-07-26': true,
-        '2024-07-27': true,
-      };
+
+      const response = await axios.get('http://172.16.4.191:3001/api/month-diary', {
+        params: { id:userId,year, month }
+    });
+
+      // const mockResponseData = {
+      //   '2024-07-01':true, 
+      //   '2024-07-25': true,
+      //   '2024-07-26': true,
+      //   '2024-07-27': true,
+      // };
+
+      const mockResponseData = response.data;
+      console.log(response.data);
 
       const daysInMonth = new Date(year, month, 0).getDate();  //해당 연도,월의 날짜수 반환
       const diaries = [];
@@ -54,10 +63,12 @@ const CalendarComponent = () => {
   };
   /*const fetchDiaries = async (year, month) => { 
     try { //api 생성 후 변경 
-      const response = await axios.get('api명세서참고', {
+      const response = await axios.get('http://localhost:3001/api/login', {
         params: { year, month }
       });
-  };*/
+  };
+  
+  */
 
   const handleDatesSet = (arg) => {
     setYear(arg.view.currentStart.getFullYear());
@@ -68,12 +79,18 @@ const CalendarComponent = () => {
   const handleDateClick = async (info) => {
     //테스트 데이터(일기유무 t/f)
     //const dateStr=info.event.startStr;
-    const mockResponseData={
-    '2024-07-01':true, 
-    '2024-07-25':true,
-    '2024-07-26':true,
-    '2024-07-27':true,
-    };
+    // const mockResponseData={
+    // '2024-07-01':true, 
+    // '2024-07-25':true,
+    // '2024-07-26':true,
+    // '2024-07-27':true,
+    // };
+    const response = await axios.get('http://172.16.4.191:3001/api/month-diary', {
+      params: {id:userId, year, month }
+  });
+    const mockResponseData = response.data;
+
+
     const diaryExists=mockResponseData[info.dateStr]||false;
     console.log(info.dateStr,diaryExists);
     if (diaryExists){ 
@@ -86,7 +103,7 @@ const CalendarComponent = () => {
   /*
   const handleDateClick=async (info)=>{
     try {
-      const response = await axios.get('api명세서참고', {
+      const response = await axios.get('http://localhost:3001/api/login', {
         params: { date: info.dateStr }
       });
   }*/

@@ -11,7 +11,7 @@ function Join(){
   const [passwordinput,setPasswordinput]=useState("");
   const [confirmPassword,setConfirmPassword]=useState("");
   const today=new Date();
-  const signup_date=`${today.getFullYear()}-${(today.getMonth()+1).toString().padStart(2,'0')}-${today.getDate().toString().padStart(2,'0')}`;
+  const signup_date = new Date().toISOString().slice(0, 10); 
   console.log(signup_date);
   const registeraxios =(e) =>{
     e.preventDefault();
@@ -22,11 +22,11 @@ function Join(){
     }
 
     axios
-    .post('api명세서참고',{
+    .post('http://172.16.4.191:3001/api/signup',{
       //request
       name:usernameinput,
       email:emailinput,
-      pw:passwordinput,
+      password:passwordinput,
       signup_date: signup_date,
     })
     .then((response)=>{
