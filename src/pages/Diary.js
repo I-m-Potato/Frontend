@@ -5,21 +5,36 @@ import { ModalContainer,ModalMain,CalenderH,ModalDate } from "./Modal";
 import nextimg from "../images/next.svg"
 import previmg from "../images/prev.svg"
 import exalbum from "../images/album.png"
+import useLogin from "../hooks/useLogin";
+import { apiGetDiary } from "../apis";
 function Diary(){
+    useLogin();
     const location=useLocation();
     const navigate=useNavigate();
     const [info, setInfo]=useState({
         date: new Date(location.state.date),
-        location:'도서관',
-        company:'친구',
+        place:'도서관',
+        companion:'친구',
         activity:'독서',
         emotion:'기분 좋은 감자',
-        recommendedsong:'뉴진스 - Super Shy',
-        recommendedtodo:'일기 쓰며 기록하기',
+        song:'뉴진스 - Super Shy',
+        todo:'일기 쓰며 기록하기',
         album:'../images/album.png'
     });
+    const getDiary = () =>{
+        const token = localStorage.getItem('userId');
+        apiGetDiary(token,location.state.date)
+        .then (response => {
+            console.log(response.results);
+            setInfo(response.results);
+        })
+        .catch(error =>{
+            alert(error);
+        })
+    }
     useEffect(() => {
-    window.scroll(0, 0);
+        getDiary();
+        window.scroll(0, 0);
   }, );
     return(
        <ModalContainer>
@@ -31,11 +46,11 @@ function Diary(){
                 <img src={nextimg}/>
             </DiaryDate>
             <DiaryContent>
-            <p>{info.location}에서 {info.company}랑 {info.activity}를 했어!</p>
+            <p>{info.location}에서 {info.companion}랑 {info.activity}를 했어!</p>
             <p>{info.emotion}였어...</p>
             <br/>
-            <p>추천 노래 : {info.recommendedsong}</p>
-            <p>추천 활동 : {info.recommendedtodo}</p>
+            <p>추천 노래 : {info.song}</p>
+            <p>추천 활동 : {info.todo}</p>
             </DiaryContent>
             <DiaryAlbum>
                 <img src={exalbum}/>

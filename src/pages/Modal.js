@@ -3,13 +3,16 @@ import { useState,useEffect} from "react";
 import { useNavigate,useLocation } from "react-router-dom";
 import ModalBackground from '../images/Diarybackground.png';
 import Mashed from '../images/Mashed.png'
-import { apiCreateDiary } from "../apis";
-
+import { apiNewDiary } from "../apis";
+import useLogin from "../hooks/useLogin";
 function Modal(){
+    useLogin();
     const navigate = useNavigate();
     const location =useLocation();
+    //new Date(location.state.date)
     const [info, setInfo]=useState({
-        date: new Date(location.state.date),
+        id: localStorage.getItem('userId'),
+        date: new Date(2024,5,17),
         location:'',
         company:'',
         activity:'',
@@ -36,8 +39,7 @@ function Modal(){
             alert('모든 필드를 입력해주세요.');
             return;
           }
-        const token = sessionStorage.getItem('token');
-        apiCreateDiary(info,token)
+        apiNewDiary(info)
         .then(response=>{
             alert('success');
             navigate('/calender');

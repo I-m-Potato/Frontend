@@ -21,10 +21,10 @@ const Login = () => {
       })
       // 다시 해보기 
       .then((response) => {
-        localStorage.setItem("Token", response.headers.authorization);
+        if((response.status===200)){
+        localStorage.setItem("userId", JSON.stringify(response.data.id));
         console.log(response);
-        if ((response.status = 200)) {
-          return navigate("/");
+        return navigate("/");
         }
       })
       .catch((err) => {
