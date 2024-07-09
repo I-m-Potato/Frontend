@@ -3,6 +3,7 @@ import { useState,useEffect} from "react";
 import { useNavigate,useLocation } from "react-router-dom";
 import ModalBackground from '../images/Diarybackground.png';
 import Mashed from '../images/Mashed.png'
+import { apiCreateDiary } from "../apis";
 
 function Modal(){
     const navigate = useNavigate();
@@ -35,9 +36,13 @@ function Modal(){
             alert('모든 필드를 입력해주세요.');
             return;
           }
-        else{
+        const token = sessionStorage.getItem('token');
+        apiCreateDiary(info,token)
+        .then(response=>{
+            alert('success');
             navigate('/calender');
-        }
+        })
+        .catch(error => alert(error));
     }
     useEffect(()=>{
     window.scroll(0,0);
