@@ -4,8 +4,10 @@ import MypageBackground from '../images/Mypage.png';
 import ThreePotato from '../images/Threepotato.png';
 import { useNavigate } from "react-router-dom";
 import { MypageMain,MypageContainer,MypageBtn,MypageInfo } from "./MyPage";
+import useLogin from "../hooks/useLogin";
 
 function ReviseInfo(){
+    useLogin();
     const navigate = useNavigate();
     const [info, setInfo]=useState({
         name: '',
