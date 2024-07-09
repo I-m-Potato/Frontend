@@ -21,10 +21,12 @@ const Login = () => {
       })
       // 다시 해보기 
       .then((response) => {
-        if((response.status===200)){
-        localStorage.setItem("userId", JSON.stringify(response.data.id));
+        if ((response.status === 200)) {
+          localStorage.setItem("userId", JSON.stringify(response.data.id));
+          // getItem했을 때도 json.parse (원래 형식으로 사용하기 위해서)
+          // 
         console.log(response);
-        return navigate("/");
+          return navigate("/");
         }
       })
       .catch((err) => {
@@ -89,6 +91,15 @@ const Input = styled.input`
   font-size: 25px;
   border-radius: 15px;
   border: 0;
+
+  //props를 활용하여 조건부로 스타일 설정 가능(비밀번호 입력 보이지 않음 방지)
+  ${props=>props.type==='password' &&  `
+    font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;
+    `}
+
+  &::placeholder {
+    font-family: 'BMJua', Arial, sans-serif; /* placeholder 폰트 설정 */
+  }
 `;
 
 const SubmitButton = styled.input`
