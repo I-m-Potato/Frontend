@@ -7,10 +7,15 @@ import axios from 'axios';
 
 
 export const apiNewDiary =
-    (info) => instance.post('/api/new-diary',info);
+    (info) => axios.post('http://172.16.4.191:3001/api/new-diary',info);
 
 export const apiGetDiary = 
-(id,date) => instance.get('/api/get-diary',{
-    id:id,
-    date: date
+(id,date) => axios.get('http://172.16.4.191:3001/api/get-diary',{
+    params: {
+        id: id,
+        date: date
+    }
 });
+
+export const apiGetProfile =
+(id) => axios.get('http://172.16.4.191:3001/api/profile',id);

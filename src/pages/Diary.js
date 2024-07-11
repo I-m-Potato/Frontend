@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useState,useEffect} from "react";
-import { useParams,useLocation,useNavigate } from "react-router-dom";
+import { useParams,useNavigate,useLocation } from "react-router-dom";
 import { ModalContainer,ModalMain,CalenderH,ModalDate } from "./Modal";
 import nextimg from "../images/next.svg"
 import previmg from "../images/prev.svg"
@@ -9,51 +9,55 @@ import useLogin from "../hooks/useLogin";
 import { apiGetDiary } from "../apis";
 function Diary(){
     useLogin();
-    const location=useLocation();
     const navigate=useNavigate();
+    const {date}= useParams();
+    const dateString = date;
+    const [year,month,day]= dateString.split('-');
     const [info, setInfo]=useState({
-        date: new Date(location.state.date),
         place:'도서관',
         companion:'친구',
         activity:'독서',
         emotion:'기분 좋은 감자',
         song:'뉴진스 - Super Shy',
         todo:'일기 쓰며 기록하기',
-        album:'../images/album.png'
+        album:'../images/album.png',
+        artist: ''
     });
     const getDiary = () =>{
         const token = localStorage.getItem('userId');
-        apiGetDiary(token,location.state.date)
+        console.log(token,date)
+        apiGetDiary(token,date)
         .then (response => {
-            console.log(response.results);
-            setInfo(response.results);
+            console.log(response.data);
+            setInfo(response.data);
         })
         .catch(error =>{
             alert(error);
+            navigate('/calender')
         })
     }
     useEffect(() => {
         getDiary();
         window.scroll(0, 0);
-  }, );
+  }, []);
     return(
        <ModalContainer>
         <CalenderH><h1>CALENDER</h1></CalenderH>
         <ModalMain>
             <DiaryDate>
                 <img src={previmg} />
-                <h1>{info.date.getMonth()+1}월 {info.date.getDate()}일</h1>
+                <h1>{month}월 {day}일</h1>
                 <img src={nextimg}/>
             </DiaryDate>
             <DiaryContent>
-            <p>{info.location}에서 {info.companion}랑 {info.activity}를 했어!</p>
+            <p>{info.place}에서 {info.companion}랑 {info.activity}를 했어!</p>
             <p>{info.emotion}였어...</p>
             <br/>
-            <p>추천 노래 : {info.song}</p>
+            <p>추천 노래 : {info.song} | {info.artist}</p>
             <p>추천 활동 : {info.todo}</p>
             </DiaryContent>
             <DiaryAlbum>
-                <img src={exalbum}/>
+                <img src={info.album}/>
             </DiaryAlbum>
         </ModalMain>
        </ModalContainer>

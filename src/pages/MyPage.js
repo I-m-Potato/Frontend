@@ -3,15 +3,33 @@ import { useState,useEffect} from "react";
 import MypageBackground from '../images/Mypage.png';
 import ThreePotato from '../images/Threepotato.png';
 import { useNavigate } from "react-router-dom";
+import { apiGetProfile } from "../apis";
+import useLogin from "../hooks/useLogin";
 
 function MyPage(){
+    useLogin();
     const navigate = useNavigate();
     const [info, setInfo]=useState({
         nickname: '행복한 감자',
-        date: new Date(2024,5,15),
+        date: '2024-05-17'
     });
-
+    const dateString = info.date;
+    const [year,month,day]= dateString.split('-');
+    
+    const getInfo = () =>{
+        const token = localStorage.getItem('userId');
+        console.log(token)
+        apiGetProfile(token)
+        .then (response => {
+            console.log(response.data);
+            setInfo(response.data);
+        })
+        .catch(error =>{
+            alert(error);
+        })
+    }
     useEffect(()=>{
+    getInfo();
     window.scroll(0,0);
     },[]);
     
@@ -19,7 +37,7 @@ function MyPage(){
        <MypageMain>
             <img src={ThreePotato} />
             <MypageContainer>
-                <MypageInfo><p>감자 심은 날:{info.date.getFullYear()}년 {info.date.getMonth()}월 {info.date.getDate()}일</p></MypageInfo>
+                <MypageInfo><p>감자 심은 날:{year}년 {month}월 {day}일</p></MypageInfo>
                 <MypageInfo><p>{info.nickname}</p></MypageInfo>
                 <MypageBtn onClick={()=>{navigate('/reviseInfo')}}><p>감자 정보 수정</p></MypageBtn>
             </MypageContainer>
