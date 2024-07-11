@@ -34,7 +34,11 @@ const CalendarComponent = () => {
       const diaries = [];
 
       for (let day = 1; day <= daysInMonth; day++) {
-        const dateStr = `${String(year)}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+
+        //const dateStr = `${String(year)}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+        //.toISOString():utc 시간 위의 dateStr은 로컬시간이므로 다르게 나옴 ->utc로 맞춰주기 
+        const utcDate= new Date(Date.UTC(year,month-1,day));
+        const dateStr=utcDate.toISOString().slice(0,10);
         if (mockResponseData[dateStr]) {
           diaries.push({
             title: '',
@@ -52,14 +56,14 @@ const CalendarComponent = () => {
   };
 
   const handleDatesSet = (arg) => {
-    setYear(arg.view.currentStart.getFullYear());
-    setMonth(arg.view.currentStart.getMonth() + 1);
+    setYear(arg.view.currentStart.getUTCFullYear());
+    setMonth(arg.view.currentStart.getUTCMonth() + 1);
   };
 
   const handleDateClick = async (info) => {
     try {
       const response = await axios.get('http://172.16.4.191:3001/api/month-diary', {
-        params: { id: userId, year: info.date.getFullYear(), month: info.date.getMonth() + 1 }
+        params: { id: userId, year: info.date.getUTCFullYear(), month: info.date.getUTCMonth() + 1 }
       });
       const mockResponseData = response.data;
       const diaryExists = mockResponseData[info.dateStr] || false;
@@ -67,7 +71,7 @@ const CalendarComponent = () => {
       if (diaryExists) {
         navigate(`/calender/diary/${info.dateStr}`, { state: { date: info.dateStr, diary: true } });
       } else {
-        navigate('/calender/modal', { state: { date: info.dateStr } });
+        navigate(`/calender/modal/${info.dateStr}`, { state: { date: info.dateStr, diary: true } });
       }
     } catch (error) {
       console.error('Error checking diary existence:', error);
