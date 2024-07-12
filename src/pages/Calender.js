@@ -15,11 +15,11 @@ const CalendarComponent = () => {
 
   let [year, setYear] = useState();
   let [month, setMonth] = useState();
-  const userId = localStorage.getItem("UserId");
+  const userId = localStorage.getItem("userId");
 
   useEffect(() => {
     if (year && month) {
-      fetchDiaries(year, month);
+      fetchDiaries(year, month+1);
     }
   }, [year, month]);
 
