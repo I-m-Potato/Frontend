@@ -34,7 +34,6 @@ function ReviseInfo(){
             window.location.reload();
         }
         else{
-            alert('비밀번호가 일치합니다.');
             apiReviseInfo(token,info)
             .then (response => {
                 console.log(response.data);
@@ -42,6 +41,7 @@ function ReviseInfo(){
             .catch(error =>{
                 alert(error);
             })
+            alert('비밀번호가 성공적으로 변경되었습니다');
             navigate('/myPage');
         }
     }

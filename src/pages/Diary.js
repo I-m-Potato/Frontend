@@ -23,6 +23,7 @@ function Diary(){
         album:'../images/album.png',
         artist: ''
     });
+
     const getDiary = () =>{
         const token = localStorage.getItem('userId');
         console.log(token,date)
@@ -45,13 +46,13 @@ function Diary(){
         <CalenderH><h1>CALENDER</h1></CalenderH>
         <ModalMain>
             <DiaryDate>
-                <img src={previmg} />
+                <img src={previmg}/>
                 <h1>{month}월 {day}일</h1>
                 <img src={nextimg}/>
             </DiaryDate>
             <DiaryContent>
-            <p>{info.place}에서 {info.companion}랑 {info.activity}를 했어!</p>
-            <p>{info.emotion}였어...</p>
+            <p>{info.place} {info.companion} {info.activity}</p>
+            <p>{info.emotion}</p>
             <br/>
             <p>추천 노래 : {info.song} | {info.artist}</p>
             <p>추천 활동 : {info.todo}</p>
