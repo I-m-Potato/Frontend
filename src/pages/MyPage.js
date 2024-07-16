@@ -10,7 +10,7 @@ function MyPage(){
     useLogin();
     const navigate = useNavigate();
     const [info, setInfo]=useState({
-        nickname: '행복한 감자',
+        name: '행복한 감자',
         date: '2024-05-17'
     });
     const dateString = info.date;
@@ -38,7 +38,7 @@ function MyPage(){
             <img src={ThreePotato} />
             <MypageContainer>
                 <MypageInfo><p>감자 심은 날:{year}년 {month}월 {day}일</p></MypageInfo>
-                <MypageInfo><p>{info.nickname}</p></MypageInfo>
+                <MypageInfo><p>{info.name}</p></MypageInfo>
                 <MypageBtn onClick={()=>{navigate('/reviseInfo')}}><p>감자 정보 수정</p></MypageBtn>
             </MypageContainer>
        </MypageMain>

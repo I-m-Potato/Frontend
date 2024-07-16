@@ -17,12 +17,17 @@ export const apiGetDiary =
     }
 });
 export const apiGetProfile =
-(id) => axios.get('http://172.16.4.191:3001/api/profile',id);
+(id) => axios.get('http://172.16.4.191:3001/api/profile',{
+    params:{
+        id: id
+    }
+});
 
 export const apiReviseInfo = 
-(id,info) => axios.patch('https://172.16.4.191:30001:/api/profile/edit',info,{
+(id,info) => axios.patch('http://172.16.4.191:3001/api/profile/edit',{
     params:{
         id: id,
-        
+        name: info.name,
+        password: info.password
     }
 })

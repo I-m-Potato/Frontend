@@ -62,37 +62,37 @@ function Modal(){
                 <h1>오늘 어디 다녀왔어??</h1>
                 <ul>
                     <li>
-                    <input id="home" type="radio" name="place" value="집" checked={info.place === '집'} onChange={handleChange}/>
+                    <input id="home" type="radio" name="place" value="집에서" checked={info.place === '집에서'} onChange={handleChange}/>
                     <label htmlFor="home" >집</label>
                     </li>
                     <li>
-                    <input id="school" type="radio" name="place" value="학교" checked={info.place === '학교'} onChange={handleChange}/>
+                    <input id="school" type="radio" name="place" value="학교에서" checked={info.place === '학교에서'} onChange={handleChange}/>
                     <label htmlFor="school" >학교</label>
                     </li>
                     <li>
-                    <input id="park"type="radio" name="place" value="공원" checked={info.place === '공원'} onChange={handleChange}/>
+                    <input id="park"type="radio" name="place" value="공원에서" checked={info.place === '공원에서'} onChange={handleChange}/>
                     <label htmlFor="park" >공원</label>
                     </li>
                     <li>
-                    <input id="cafe"type="radio" name="place" value="카페" checked={info.place === '카페'} onChange={handleChange}/>
+                    <input id="cafe"type="radio" name="place" value="카페에서" checked={info.place === '카페에서'} onChange={handleChange}/>
                     <label htmlFor="cafe">카페</label>
                     </li>
                 </ul>
                 <ul>
                     <li>
-                    <input id="library"type="radio" name="place" value="도서관" checked={info.place === '도서관'} onChange={handleChange}/>
+                    <input id="library"type="radio" name="place" value="도서관에서" checked={info.place === '도서관에서'} onChange={handleChange}/>
                     <label htmlFor="library">도서관</label>
                     </li>
                     <li>
-                    <input id="travel"type="radio" name="place" value="여행지" checked={info.place === '여행지'} onChange={handleChange}/>
+                    <input id="travel"type="radio" name="place" value="여행지에서" checked={info.place === '여행지에서'} onChange={handleChange}/>
                     <label htmlFor="travel">여행지</label>
                     </li>
                     <li>
-                    <input id="trail"type="radio" name="place" value="산책지" checked={info.place === '산책지'} onChange={handleChange}/>
+                    <input id="trail"type="radio" name="place" value="산책로에서" checked={info.place === '산책로에서'} onChange={handleChange}/>
                     <label htmlFor="trail">산책로</label>
                     </li>
                     <li>
-                    <input id="gym"type="radio" name="place" value="헬스장" checked={info.place === '헬스장'} onChange={handleChange}/>
+                    <input id="gym"type="radio" name="place" value="헬스장에서" checked={info.place === '헬스장에서'} onChange={handleChange}/>
                     <label htmlFor="gym">헬스장</label>
                     </li>
                 </ul>
@@ -105,33 +105,33 @@ function Modal(){
                             <label htmlFor="alone">혼자</label>
                         </li>
                         <li>
-                            <input id="family" type="radio" name="companion" value="가족" checked={info.companion==='가족'} onChange={handleChange}/>
+                            <input id="family" type="radio" name="companion" value="가족이랑" checked={info.companion==='가족이랑'} onChange={handleChange}/>
                             <label htmlFor="family">가족</label>
                         </li>
                         <li>
-                            <input id="friend" type="radio" name="companion" value="친구" checked={info.companion==='친구'} onChange={handleChange}/>
+                            <input id="friend" type="radio" name="companion" value="친구와" checked={info.companion==='친구와'} onChange={handleChange}/>
                             <label htmlFor="friend">친구</label>
                         </li>
                         <li>
-                            <input id="couple" type="radio" name="companion" value="연인" checked={info.companion==='연인'} onChange={handleChange}/>
+                            <input id="couple" type="radio" name="companion" value="연인이랑" checked={info.companion==='연인이랑'} onChange={handleChange}/>
                             <label htmlFor="couple">연인</label>
                         </li>
                     </ul>
                     <ul>
                         <li>
-                            <input id="companion" type="radio" name="companion" value="동료" checked={info.companion==='동료'} onChange={handleChange}/>
+                            <input id="companion" type="radio" name="companion" value="동료와" checked={info.companion==='동료와'} onChange={handleChange}/>
                             <label htmlFor="companion">동료</label>
                         </li>
                         <li>
-                            <input id="pet" type="radio" name="companion" value="반려동물" checked={info.companion==='반려동물'} onChange={handleChange}/>
+                            <input id="pet" type="radio" name="companion" value="반려동물이랑" checked={info.companion==='반려동물이랑'} onChange={handleChange}/>
                             <label htmlFor="pet">반려동물</label>
                         </li>
                         <li>
-                            <input id="acquaintance" type="radio" name="companion" value="지인" checked={info.companion==='지인'} onChange={handleChange}/>
+                            <input id="acquaintance" type="radio" name="companion" value="지인과" checked={info.companion==='지인과'} onChange={handleChange}/>
                             <label htmlFor="acquaintance">지인</label>
                         </li>
                         <li>
-                            <input id="parent" type="radio" name="companion" value="부모님" checked={info.companion==='부모님'} onChange={handleChange}/>
+                            <input id="parent" type="radio" name="companion" value="부모님과" checked={info.companion==='부모님과'} onChange={handleChange}/>
                             <label htmlFor="parent">부모님</label>
                         </li>
                     </ul>
@@ -140,37 +140,37 @@ function Modal(){
                     <h1>뭐했어?</h1>
                     <ul>
                         <li>
-                            <input id="walk" type="radio" name="activity" value="산책" checked={info.activity==='산책'} onChange={handleChange}/>
+                            <input id="walk" type="radio" name="activity" value="산책을 했어" checked={info.activity==='산책을 했어'} onChange={handleChange}/>
                             <label htmlFor="walk">산책</label>
                         </li>
                         <li>
-                            <input id="eat" type="radio" name="activity" value="맛집" checked={info.activity==='맛집'} onChange={handleChange}/>
+                            <input id="eat" type="radio" name="activity" value="맛집을 갔어" checked={info.activity==='맛집을 갔어'} onChange={handleChange}/>
                             <label htmlFor="eat">맛집</label>
                         </li>
                         <li>
-                            <input id="exercise" type="radio" name="activity" value="운동" checked={info.activity==='운동'} onChange={handleChange}/>
+                            <input id="exercise" type="radio" name="activity" value="운동을 했어" checked={info.activity==='운동을 했어'} onChange={handleChange}/>
                             <label htmlFor="exercise">운동</label>
                         </li>
                         <li>
-                            <input id="movie" type="radio" name="activity" value="영화" checked={info.activity==='영화'} onChange={handleChange}/>
+                            <input id="movie" type="radio" name="activity" value="영화를 봤어" checked={info.activity==='영화를 봤어'} onChange={handleChange}/>
                             <label htmlFor="movie">영화</label>
                         </li>
                     </ul>
                     <ul>
                         <li>
-                            <input id="read" type="radio" name="activity" value="독서" checked={info.activity==='독서'} onChange={handleChange}/>
+                            <input id="read" type="radio" name="activity" value="독서를 했어" checked={info.activity==='독서를 했어'} onChange={handleChange}/>
                             <label htmlFor="read">독서</label>
                         </li>
                         <li>
-                            <input id="cook" type="radio" name="activity" value="요리" checked={info.activity==='요리'} onChange={handleChange}/>
+                            <input id="cook" type="radio" name="activity" value="요리했어" checked={info.activity==='요리했어'} onChange={handleChange}/>
                             <label htmlFor="cook">요리</label>
                         </li>
                         <li>
-                            <input id="buy" type="radio" name="activity" value="쇼핑" checked={info.activity==='쇼핑'} onChange={handleChange}/>
+                            <input id="buy" type="radio" name="activity" value="쇼핑했어" checked={info.activity==='쇼핑했어'} onChange={handleChange}/>
                             <label htmlFor="buy">쇼핑</label>
                         </li>
                         <li>
-                            <input id="sleep" type="radio" name="activity" value="숙면" checked={info.activity==='숙면'} onChange={handleChange}/>
+                            <input id="sleep" type="radio" name="activity" value="숙면을 취했어" checked={info.activity==='숙면을 취했어'} onChange={handleChange}/>
                             <label htmlFor="sleep">숙면</label>
                         </li>
                     </ul>
@@ -184,15 +184,15 @@ function Modal(){
                     <TodayEcilpse><p>오늘의 감자</p></TodayEcilpse>
                 </ModalToday>
                 <ModalPotato>
-                    <input id="1" type="radio" name="emotion" value="슬픔" checked={info.emotion==='슬픔'} onChange={handleChange}/>
+                    <input id="1" type="radio" name="emotion" value="슬픔이었어.." checked={info.emotion==='슬픔이었어..'} onChange={handleChange}/>
                     <label htmlFor="1"><img src={Mashed}/></label>
-                    <input id="2" type="radio" name="emotion" value="기쁨" checked={info.emotion==='기쁨'} onChange={handleChange}/>
+                    <input id="2" type="radio" name="emotion" value="기쁨이었어!!" checked={info.emotion==='기쁨이었어!!'} onChange={handleChange}/>
                     <label htmlFor="2"><img src={Mashed}/></label>
                 </ModalPotato>
                 <ModalPotato>
-                    <input id="3" type="radio" name="emotion" value="불안" checked={info.emotion==='불안'} onChange={handleChange}/>
+                    <input id="3" type="radio" name="emotion" value="불안했었어ㅠㅠ" checked={info.emotion==='불안했었어ㅠㅠ'} onChange={handleChange}/>
                     <label htmlFor="3"><img src={Mashed}/></label>
-                    <input id="4" type="radio" name="emotion" value="신남" checked={info.emotion==='신남'} onChange={handleChange}/>
+                    <input id="4" type="radio" name="emotion" value="신났었어~~" checked={info.emotion==='신났었어~~'} onChange={handleChange}/>
                     <label htmlFor="4"><img src={Mashed}/></label>
                 </ModalPotato>
                 <ModalDone>
