@@ -3,13 +3,10 @@ import ThreePotato from '../images/character.png';
 import React, {useState} from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
-<<<<<<< HEAD
-
-=======
 import useLogin from "../hooks/useLogin";
 import { url } from "../apis";
->>>>>>> 284e65fd559b9feb5231b5e695a0c5812195ebef
 function Join(){
+  useLogin();
   const navigate=useNavigate();
   const [usernameinput,setUsernameinput]=useState("");
   const [emailinput,setEmailinput]=useState("");
