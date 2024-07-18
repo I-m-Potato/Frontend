@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import character from '../images/character.png';
 import useLogin from '../hooks/useLogin';
+import {url} from '../apis'
 
 const CalendarComponent = () => {
   useLogin();
@@ -27,7 +28,7 @@ const CalendarComponent = () => {
 
   const fetchDiaries = async (year, month) => {
     try {
-      const response = await axios.get('http://172.16.4.191:3001/api/month-diary', {
+      const response = await axios.get(`${url}/api/month-diary`, {
         params: { id: userId, year, month }
       });
       const mockResponseData = response.data;
@@ -61,12 +62,13 @@ const CalendarComponent = () => {
     setYear(arg.view.currentStart.getUTCFullYear());
     setMonth(arg.view.currentStart.getUTCMonth() + 1);
   };
-
+  
   const handleDateClick = async (info) => {
     try {
-      const response = await axios.get('http://172.16.4.191:3001/api/month-diary', {
+      const response = await axios.get(`${url}/api/month-diary`, {
         params: { id: userId, year: info.date.getUTCFullYear(), month: info.date.getUTCMonth() + 1 }
       });
+      console.log("info입니다", info);
       const mockResponseData = response.data;
       const diaryExists = mockResponseData[info.dateStr] || false;
       console.log(info.dateStr, diaryExists);
@@ -79,7 +81,6 @@ const CalendarComponent = () => {
       console.error('Error checking diary existence:', error);
     }
   };
-
   const handleEventImageClick = (dateStr) => {
     //handleDateClick({ dateStr, date: new Date(dateStr) });
     console.log(dateStr);
@@ -147,6 +148,7 @@ const EventContent = styled.div`
   justify-content: center;
   align-items: center;
   height: 100%;
+
 `;
 
 const EventImage = styled.img`

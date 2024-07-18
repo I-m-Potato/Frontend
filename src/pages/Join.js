@@ -3,7 +3,12 @@ import ThreePotato from '../images/character.png';
 import React, {useState} from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+<<<<<<< HEAD
 
+=======
+import useLogin from "../hooks/useLogin";
+import { url } from "../apis";
+>>>>>>> 284e65fd559b9feb5231b5e695a0c5812195ebef
 function Join(){
   const navigate=useNavigate();
   const [usernameinput,setUsernameinput]=useState("");
@@ -22,7 +27,7 @@ function Join(){
     }
 
     axios
-    .post('http://172.16.4.191:3001/api/signup',{
+    .post(`${url}/api/signup`,{
       //request
       name:usernameinput,
       email:emailinput,

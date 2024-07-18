@@ -5,17 +5,32 @@ import axios from 'axios';
      withCredentials: true,
  });
 
+export const url= 'http://172.16.65.160:3001';
+
+//export const apiNewDiary =
+//    (info) => axios.post('http://172.16.4.191:3001/api/new-diary',info);
 
 export const apiNewDiary =
-    (info) => axios.post('http://172.16.4.191:3001/api/new-diary',info);
-
+    (info) => axios.post(`${url}/api/new-diary`,info);
 export const apiGetDiary = 
-(id,date) => axios.get('http://172.16.4.191:3001/api/get-diary',{
+(id,date) => axios.get(`${url}/api/get-diary`,{
     params: {
         id: id,
         date: date
     }
 });
-
 export const apiGetProfile =
-(id) => axios.get('http://172.16.4.191:3001/api/profile',id);
+(id) => axios.get(`${url}/api/profile`,{
+    params:{
+        id: id
+    }
+});
+
+export const apiReviseInfo = 
+(id,info) => axios.patch(`${url}/api/profile/edit`,{
+    params:{
+        id: id,
+        name: info.name,
+        password: info.password
+    }
+})

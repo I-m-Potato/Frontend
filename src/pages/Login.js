@@ -4,7 +4,7 @@ import ThreePotato from '../images/character.png';
 import {useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import axios from 'axios';
-
+import { url } from "../apis";
 
 const Login = () => {
   const navigate= useNavigate();
@@ -15,7 +15,7 @@ const Login = () => {
     e.preventDefault();
 	// 창이 새로고침되는 것을 막는다. 
     axios
-      .post('http://172.16.4.191:3001/api/login', {
+      .post(`${url}/api/login`, {
         email: email,
         password: password,
       })
