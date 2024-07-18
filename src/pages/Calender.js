@@ -23,6 +23,8 @@ const CalendarComponent = () => {
     }
   }, [year, month]);
 
+  
+
   const fetchDiaries = async (year, month) => {
     try {
       const response = await axios.get('http://172.16.4.191:3001/api/month-diary', {
@@ -79,7 +81,9 @@ const CalendarComponent = () => {
   };
 
   const handleEventImageClick = (dateStr) => {
-    handleDateClick({ dateStr, date: new Date(dateStr) });
+    //handleDateClick({ dateStr, date: new Date(dateStr) });
+    console.log(dateStr);
+    handleDateClick(dateStr);
   };
 
   const renderEventContent = (eventInfo) => {
