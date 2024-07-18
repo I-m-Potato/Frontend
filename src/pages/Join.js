@@ -4,7 +4,7 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import useLogin from "../hooks/useLogin";
-
+import { url } from "../apis";
 function Join(){
   useLogin();
   const navigate=useNavigate();
@@ -24,7 +24,7 @@ function Join(){
     }
 
     axios
-    .post('http://172.16.4.191:3001/api/signup',{
+    .post(`${url}/api/signup`,{
       //request
       name:usernameinput,
       email:emailinput,
