@@ -15,6 +15,8 @@ function ReviseInfo(){
         password: '',
         confirmpw:''
     });
+
+
     const token = localStorage.getItem('userId');
     const handleChange = (e) => {
         const {name,value} = e.target;
